@@ -1,6 +1,7 @@
 import customtkinter as ctk
 
 from ui.NavBar import NavBar
+from ui.SelectorPanel import SelectorPanel
 
 
 # --------------------- Window ---------------------
@@ -17,6 +18,9 @@ class App(ctk.CTk):
         self.navbar = NavBar(root=self, width=self.WIDTH, height=self.HEIGHT / 20, fg_color="#1f1b1b",
                              border_width=2)
         self.navbar.pack(side=ctk.TOP)
+
+        self.selector_panel = SelectorPanel(root=self, width=self.WIDTH / 2, height=self.HEIGHT - self.HEIGHT / 20)
+        self.selector_panel.pack(side=ctk.LEFT)
 
 
 if __name__ == "__main__":
