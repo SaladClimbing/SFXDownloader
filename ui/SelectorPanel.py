@@ -1,3 +1,5 @@
+from threading import Thread
+
 import customtkinter as ctk
 
 from downloader import download
@@ -31,6 +33,7 @@ class SelectorPanel(ctk.CTkFrame):
     # <editor-fold desc="Functionality">
 
     def download(self):
-        download(self.search_box.get(), False)
+        download_thread = Thread(target=download, args=(self.search_box.get(), False))
+        download_thread.start()
 
     # </editor-fold>
