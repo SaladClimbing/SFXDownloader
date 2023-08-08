@@ -11,11 +11,14 @@ class NavBar(ctk.CTkFrame):
         self.HEIGHT = kwargs['height']
         self.WIDTH = kwargs['width']
 
+        self.pack_title()
+        self.pack_buttons()
+        self.bind("<Map>", self.frame_mapped)
+
+    def pack_title(self):
         self.title = ctk.CTkLabel(self, text="SFXDownloader", font=('Helvetica', 18, 'bold'),
                                   height=self.HEIGHT, width=self.WIDTH - 2 * self.HEIGHT, anchor="w", padx=10)
         self.title.pack(side=ctk.LEFT)
-        self.pack_buttons()
-        self.bind("<Map>", self.frame_mapped)
 
     def pack_buttons(self):
         self.quit_button = ctk.CTkButton(self, text=" × ", font=('Helvetica', 18, 'bold'), command=self.root.quit,
@@ -28,6 +31,7 @@ class NavBar(ctk.CTkFrame):
                                         width=self.HEIGHT) \
             .pack(side=ctk.RIGHT)
 
+    # Both frame_mapped and minimize were found here:
     # https://stackoverflow.com/questions/29186327/tclerror-cant-iconify-override-redirect-flag-is-set
     def frame_mapped(self, e):
         self.root.update_idletasks()
