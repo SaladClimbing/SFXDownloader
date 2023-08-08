@@ -15,6 +15,8 @@ class SelectorPanel(ctk.CTkFrame):
 
         self.pack_search()
 
+    # <editor-fold desc="Packing Widgets"
+
     def pack_search(self):
         self.search_box = ctk.CTkEntry(self, height=25, width=200, font=('Helvetica', 18, 'bold'),
                                        placeholder_text="Insert Link Here")
@@ -24,5 +26,11 @@ class SelectorPanel(ctk.CTkFrame):
                                            command=self.download) \
             .pack(padx=100, pady=5)
 
+    # </editor-fold>
+
+    # <editor-fold desc="Functionality">
+
     def download(self):
         download(self.search_box.get(), False)
+
+    # </editor-fold>

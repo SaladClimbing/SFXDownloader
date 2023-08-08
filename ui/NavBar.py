@@ -15,11 +15,14 @@ class NavBar(ctk.CTkFrame):
         self.pack_buttons()
         self.bind("<Map>", self.frame_mapped)
 
+    # <editor-fold desc="Packing Widgets">
+
     def pack_title(self):
         self.title = ctk.CTkLabel(self, text="SFXDownloader", font=('Helvetica', 18, 'bold'),
                                   height=self.HEIGHT, width=self.WIDTH - 2 * self.HEIGHT, anchor="w", padx=10)
         self.title.pack(side=ctk.LEFT)
 
+        # Binds the label to the functions for movement
         self.title.bind("<ButtonPress-1>", self.start_move)
         self.title.bind("<ButtonRelease-1>", self.stop_move)
         self.title.bind("<B1-Motion>", self.do_move)
@@ -35,6 +38,12 @@ class NavBar(ctk.CTkFrame):
                                         width=self.HEIGHT) \
             .pack(side=ctk.RIGHT)
 
+    # </editor-fold>
+
+    # <editor-fold desc="Functionality">
+
+    # <editor-fold desc="Minimizing">
+
     # Both frame_mapped and minimize were found here:
     # https://stackoverflow.com/questions/29186327/tclerror-cant-iconify-override-redirect-flag-is-set
     def frame_mapped(self, e):
@@ -47,6 +56,10 @@ class NavBar(ctk.CTkFrame):
         self.root.overrideredirect(False)
         # root.state('withdrawn')
         self.root.state('iconic')
+
+    # </editor-fold>
+
+    # <editor-fold desc="Window movement">
 
     # Moveable window found here:
     # https://stackoverflow.com/questions/4055267/tkinter-mouse-drag-a-window-without-borders-eg-overridedirect1
@@ -64,3 +77,6 @@ class NavBar(ctk.CTkFrame):
         x = self.root.winfo_x() + deltax
         y = self.root.winfo_y() + deltay
         self.root.geometry(f"+{x}+{y}")
+    # </editor-fold>
+
+    # </editor-fold>
