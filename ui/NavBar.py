@@ -61,6 +61,6 @@ class NavBar(ctk.CTkFrame):
     def do_move(self, event):
         deltax = event.x - self.x
         deltay = event.y - self.y
-        x = self.winfo_x() + deltax
-        y = self.winfo_y() + deltay
+        x = self.root.winfo_x() + deltax
+        y = self.root.winfo_y() + deltay
         self.root.geometry(f"+{x}+{y}")
