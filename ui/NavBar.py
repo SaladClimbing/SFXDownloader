@@ -20,6 +20,10 @@ class NavBar(ctk.CTkFrame):
                                   height=self.HEIGHT, width=self.WIDTH - 2 * self.HEIGHT, anchor="w", padx=10)
         self.title.pack(side=ctk.LEFT)
 
+        self.title.bind("<ButtonPress-1>", self.start_move)
+        self.title.bind("<ButtonRelease-1>", self.stop_move)
+        self.title.bind("<B1-Motion>", self.do_move)
+
     def pack_buttons(self):
         self.quit_button = ctk.CTkButton(self, text=" × ", font=('Helvetica', 18, 'bold'), command=self.root.quit,
                                          fg_color="#1f1b1b", hover_color="darkred", height=self.HEIGHT,
@@ -43,3 +47,20 @@ class NavBar(ctk.CTkFrame):
         self.root.overrideredirect(False)
         # root.state('withdrawn')
         self.root.state('iconic')
+
+    # Moveable window found here:
+    # https://stackoverflow.com/questions/4055267/tkinter-mouse-drag-a-window-without-borders-eg-overridedirect1
+    def start_move(self, event):
+        self.x = event.x
+        self.y = event.y
+
+    def stop_move(self, event):
+        self.x = None
+        self.y = None
+
+    def do_move(self, event):
+        deltax = event.x - self.x
+        deltay = event.y - self.y
+        x = self.winfo_x() + deltax
+        y = self.winfo_y() + deltay
+        self.root.geometry(f"+{x}+{y}")
