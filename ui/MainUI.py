@@ -1,5 +1,6 @@
 import customtkinter as ctk
 
+from ui.DownloadInfo import DownloadInfo
 from ui.NavBar import NavBar
 from ui.SelectorPanel import SelectorPanel
 
@@ -28,6 +29,9 @@ class App(ctk.CTk):
         self.selector_panel = SelectorPanel(root=self, width=self.WIDTH / 2, height=self.HEIGHT - self.navbar_height,
                                             fg_color="#242424")
         self.selector_panel.pack(side=ctk.LEFT)
+
+        self.DownloadInfo = DownloadInfo(root=self, width=200, height=200)
+        self.DownloadInfo.pack(side=ctk.RIGHT)
 
 
 if __name__ == "__main__":
