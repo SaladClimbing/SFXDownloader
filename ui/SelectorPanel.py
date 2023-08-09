@@ -48,11 +48,13 @@ class SelectorPanel(ctk.CTkFrame):
         download_thread = Thread(target=download, args=(self.search_box.get(), False))
         download_thread.start()
 
-    def search(self):
+    def search(self, **kwargs):
+        if kwargs['url'] != None:
+            self.video = YouTube(kwargs['url'])
         try:
             self.video = YouTube(self.search_box.get())
         except:
             return None
-        return YouTube.thumbnail_url
+        return self.video.thumbnail_url
 
     # </editor-fold>
