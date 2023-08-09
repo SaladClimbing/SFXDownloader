@@ -30,13 +30,13 @@ class NavBar(ctk.CTkFrame):
     def pack_buttons(self):
         self.quit_button = ctk.CTkButton(self, text=" × ", font=('Helvetica', 18, 'bold'), command=self.root.quit,
                                          fg_color="#1f1b1b", hover_color="darkred", height=self.HEIGHT,
-                                         width=self.HEIGHT) \
-            .pack(side=ctk.RIGHT)  # Yes the width is supposed to be height
+                                         width=self.HEIGHT)
+        self.quit_button.pack(side=ctk.RIGHT)  # Yes the width is supposed to be height
         self.min_button = ctk.CTkButton(self, text=" 🗕 ", font=('Helvetica', 18, 'bold'),
                                         command=self.minimize,
                                         fg_color="#1f1b1b", hover_color="darkred", height=self.HEIGHT,
-                                        width=self.HEIGHT) \
-            .pack(side=ctk.RIGHT)
+                                        width=self.HEIGHT)
+        self.min_button.pack(side=ctk.RIGHT)
 
     # </editor-fold>
 
