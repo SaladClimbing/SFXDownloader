@@ -26,11 +26,11 @@ class App(ctk.CTk):
                              border_width=2)
         self.navbar.pack(side=ctk.TOP)
 
-        self.selector_panel = SelectorPanel(root=self, width=self.WIDTH / 2, height=self.HEIGHT - self.navbar_height,
+        self.selector_panel = SelectorPanel(root=self, width=self.WIDTH / 2, height=self.HEIGHT - self.navbar.HEIGHT,
                                             fg_color="#242424")
         self.selector_panel.pack(side=ctk.LEFT)
 
-        self.DownloadInfo = DownloadInfo(root=self, width=200, height=200)
+        self.DownloadInfo = DownloadInfo(root=self, width=self.WIDTH / 2, height=self.HEIGHT - self.navbar.HEIGHT)
         self.DownloadInfo.pack(side=ctk.RIGHT)
 
 
