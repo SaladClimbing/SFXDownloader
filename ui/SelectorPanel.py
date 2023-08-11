@@ -1,6 +1,5 @@
 import tkinter as tk
 from datetime import timedelta
-from threading import Thread
 
 import customtkinter as ctk
 from pytube import YouTube
@@ -50,8 +49,12 @@ class SelectorPanel(ctk.CTkFrame):
     # <editor-fold desc="Functionality">
 
     def download(self):
-        download_thread = Thread(target=download, args=(self.search_box.get(), False))
-        download_thread.start()
+        # download_thread = Thread(target=download, args=(self.search_box.get(), False))
+        # download_thread.start()
+        if self.keep_video.get() == 1:
+            download(self.search_box.get(), True)
+        else:
+            download(self.search_box.get(), False)
 
     def search_button_clicked(self):
         url = self.search_box.get()
