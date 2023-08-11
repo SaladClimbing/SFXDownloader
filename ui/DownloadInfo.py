@@ -17,5 +17,5 @@ class DownloadInfo(ctk.CTkFrame):
 
     def pack_thumbnail(self, url):
         img = get_resized_thumbnail(url, self.WIDTH)
-        self.thumbnail = ctk.CTkLabel(self, image=img, width=self.WIDTH, height=self.WIDTH * 9 / 16)
+        self.thumbnail = ctk.CTkLabel(self, image=img, width=self.WIDTH, height=self.WIDTH * 9 / 16, text="")
         self.thumbnail.pack()
