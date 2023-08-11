@@ -1,8 +1,6 @@
-from io import BytesIO
-
 import customtkinter as ctk
-import requests
-from PIL import ImageTk, Image
+
+from ui.ImageManipulation import get_resized_thumbnail
 
 
 class DownloadInfo(ctk.CTkFrame):
@@ -15,11 +13,9 @@ class DownloadInfo(ctk.CTkFrame):
         self.WIDTH = kwargs['width']
 
         self.pack_thumbnail(
-            "https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1280,h_720/https://blog.snappa.com/wp-content/uploads/2019/01/YouTube-Thumbnail-Dimensions.jpg")
+            "https://www.youtube.com/watch?v=wWltASCJO-U")
 
     def pack_thumbnail(self, url):
-        img_data = requests.get(url).content
-        unedited_img = ImageTk.PhotoImage(Image.open(BytesIO(img_data)))
-        img = unedited_img.resize((self.WIDTH, self.HEIGHT * 9 / 16))  # TODO FIX RESIZE
+        img = get_resized_thumbnail(url, self.WIDTH)
         self.thumbnail = ctk.CTkLabel(self, image=img, width=self.WIDTH, height=self.WIDTH * 9 / 16)
         self.thumbnail.pack()
