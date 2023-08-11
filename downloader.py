@@ -23,3 +23,8 @@ def download(link: str, keep: bool):
     # Deletes mp4
     if not keep:
         delFile(f'{yt.title}.mp4')
+
+
+def search(url):
+    video = YouTube(url)
+    return video.thumbnail_url

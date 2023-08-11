@@ -1,7 +1,6 @@
 from threading import Thread
 
 import customtkinter as ctk
-from pytube import YouTube
 
 from downloader import download
 
@@ -47,14 +46,5 @@ class SelectorPanel(ctk.CTkFrame):
     def download(self):
         download_thread = Thread(target=download, args=(self.search_box.get(), False))
         download_thread.start()
-
-    def search(self, **kwargs):
-        if kwargs['url'] != None:
-            self.video = YouTube(kwargs['url'])
-        try:
-            self.video = YouTube(self.search_box.get())
-        except:
-            return None
-        return self.video.thumbnail_url
 
     # </editor-fold>
