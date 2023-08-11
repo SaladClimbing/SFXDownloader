@@ -2,15 +2,17 @@ from threading import Thread
 
 import customtkinter as ctk
 
-from downloader import download
+from downloader import download, search
+from ui.ImageManipulation import get_resized_thumbnail
 
 
 # --------------------- Selector Panel ---------------------
 class SelectorPanel(ctk.CTkFrame):
-    def __init__(self, root, **kwargs):
+    def __init__(self, root, download_info, **kwargs):
         super().__init__(root, **kwargs)
 
         self.root = root
+        self.download_info = download_info
 
         self.HEIGHT = kwargs['height']
         self.WIDTH = kwargs['width']
@@ -26,7 +28,8 @@ class SelectorPanel(ctk.CTkFrame):
                                        placeholder_text="Insert Link Here")
         self.search_box.pack(padx=100, pady=5)
 
-        self.search_button = ctk.CTkButton(self, height=25, width=200, text="Search", font=('Helvetica', 18, 'bold'))
+        self.search_button = ctk.CTkButton(self, height=25, width=200, text="Search", font=('Helvetica', 18, 'bold'),
+                                           command=lambda: self.change_thumbnail(self.search_box.get()))
         self.search_button.pack(padx=100, pady=5)
 
     def pack_options(self):
@@ -46,5 +49,11 @@ class SelectorPanel(ctk.CTkFrame):
     def download(self):
         download_thread = Thread(target=download, args=(self.search_box.get(), False))
         download_thread.start()
+
+    def search_button_clicked(self):
+        self.change_thumbnail(self.search_box.get())
+
+    def change_thumbnail(self, url):
+        self.download_info.thumbnail.configure(image=get_resized_thumbnail(search(url), self.download_info.WIDTH))
 
     # </editor-fold>
