@@ -1,7 +1,8 @@
+import os.path
 import ssl
-import subprocess
 from os import remove as delFile
 
+from moviepy.editor import VideoFileClip
 from pytube import YouTube
 
 
@@ -17,12 +18,17 @@ def download(link: str, keep: bool):
         .first() \
         .download()
 
-    # Converts mp4 to mp3
-    subprocess.run(f'ffmpeg -i "{yt.title}.mp4" "{yt.title}.mp3"', shell=True)
+    convert_video_to_audio(f'{yt.title}.mp4')
 
     # Deletes mp4
     if not keep:
         delFile(f'{yt.title}.mp4')
+
+
+def convert_video_to_audio(video_file, output_ext="mp3"):
+    filename, ext = os.path.splitext(video_file)
+    clip = VideoFileClip(video_file)
+    clip.audio.write_audiofile(f'{filename}.{output_ext}')
 
 
 def search(url):
