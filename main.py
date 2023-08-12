@@ -1,8 +1,9 @@
 import argparse
+import os
 import ssl
-import subprocess
 from os import remove as delFile
 
+from moviepy.editor import VideoFileClip
 from pytube import YouTube
 
 
@@ -26,7 +27,9 @@ def main():
         .download()
 
     # Converts mp4 to mp3
-    subprocess.run(f'ffmpeg -i "{yt.title}.mp4" "{yt.title}.mp3"', shell=True)
+    filename, ext = os.path.splitext(f'{yt.title}.mp4')
+    clip = VideoFileClip(f'{yt.title}.mp4')
+    clip.audio.write_audiofile(f'{filename}.mp3')
 
     # Deletes mp4
     if not args.keep:
